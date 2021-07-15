@@ -6,12 +6,17 @@
   "scripts": {
     "start": "parcel index.html --open",
     "build": "parcel build index.html",
-    "test": "jest"
+    "test": "web-test-runner \"src/*.test.js\" --node-resolve --coverage",
+    "test:watch": "web-test-runner \"src/**/*.test.js\" --node-resolve --watch"
   },
   "dependencies": {
     "mobx": "^6.3.2",
     "p5": "^1.4.0",
     "parcel-bundler": "^1.6.1"
   },
-  "keywords": []
+  "keywords": [],
+  "devDependencies": {
+    "@esm-bundle/chai": "^4.3.4",
+    "@web/test-runner": "^0.13.13"
+  }
 }
