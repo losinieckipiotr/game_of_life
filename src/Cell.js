@@ -1,8 +1,4 @@
 export class Cell {
-  static getKey(i, j) {
-    return `${i}:${j}`;
-  }
-
   constructor({ i, j, x, y, squareSize, alive }) {
     this.i = i; // col
     this.j = j; // row

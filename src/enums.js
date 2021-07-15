@@ -1,5 +1,5 @@
-export const squareSize = 20; // px
-export const boardSize = 50;
+export const squareSize = 15; // px
+export const boardSize = 80;
 
 export const boardWidth = squareSize * boardSize;
 export const boardHeight = squareSize * boardSize;

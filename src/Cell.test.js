@@ -40,7 +40,6 @@ it("Should clone cell", () => {
     squareSize: 10,
     alive: true
   });
-
   const cell2 = cell1.clone()
 
   expect(cell1).to.be.deep.equal(cell2)

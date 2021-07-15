@@ -9,16 +9,24 @@ export class CellList {
     if (cellsMap) {
       cellsMap.forEach((cell) => {
         const newCell = cell.clone();
-        this.cellsMap.set(newCell.key, newCell);
+        this.cellsMap.set(this.getCellKey(newCell), newCell);
       });
     } else {
       for (let i = 0; i < boardSize; i++) {
         for (let j = 0; j < boardSize; j++) {
           const cell = new Cell({ i, j, squareSize });
-          this.cellsMap.set(cell.key, cell);
+          this.cellsMap.set(this.getCellKey(cell), cell);
         }
       }
     }
+  }
+
+  calcCellKey(i, j) {
+    return `${i}:${j}`;
+  }
+
+  getCellKey (cell) {
+    return this.calcCellKey(cell.i, cell.j)
   }
 
   clone() {
@@ -34,11 +42,11 @@ export class CellList {
   }
 
   getCell(i, j) {
-    return this.cellsMap.get(Cell.getKey(i, j));
+    return this.cellsMap.get(this.calcCellKey(i, j));
   }
 
   getCellVal(i, j) {
-    const cell = this.cellsMap.get(Cell.getKey(i, j));
+    const cell = this.cellsMap.get(this.calcCellKey(i, j));
     if (cell !== undefined && cell.alive) {
       return 1;
     } else {
@@ -46,7 +54,7 @@ export class CellList {
     }
   }
 
-  getAliveNeighboursOld(i, j) {
+  getAliveNeighbours(i, j) {
     let sum = 0;
 
     const leftTopCell = this.getCell(i - 1, j - 1);
@@ -70,7 +78,7 @@ export class CellList {
     return sum;
   }
 
-  getAliveNeighboursOld2(i, j) {
+  getAliveNeighbours2(i, j) {
     const neighbours = [
       [-1, -1], // leftTopCell
       [-1, 0], // leftCell
@@ -96,7 +104,7 @@ export class CellList {
     return sum;
   }
 
-  getAliveNeighbours(i, j) {
+  getAliveNeighbours3(i, j) {
     let sum = 0;
 
     sum += this.getCellVal(i - 1, j - 1);

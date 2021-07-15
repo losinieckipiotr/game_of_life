@@ -1,6 +1,7 @@
 body {
   font-family: sans-serif;
-  margin: px;
+  margin: 0;
+  background-color: rgb(255, 255, 255);
 }
 
 .messages-paragraph {
