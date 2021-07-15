@@ -9,10 +9,6 @@ export class Cell {
     this.alive = !!alive;
   }
 
-  get key() {
-    return Cell.getKey(this.i, this.j);
-  }
-
   clone() {
     return new Cell({
       i: this.i,
