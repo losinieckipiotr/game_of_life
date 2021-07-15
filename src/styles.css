@@ -1,0 +1,13 @@
+body {
+  font-family: sans-serif;
+  margin: px;
+}
+
+.messages-paragraph {
+  display: flex;
+}
+
+.msg {
+  display: inline-flex;
+  margin-right: 1em;
+}
