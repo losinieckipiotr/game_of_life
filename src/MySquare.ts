@@ -1,5 +1,12 @@
-export function MySquare(p, { size, color }) {
-  return (x, y) => {
+import p5 from "p5"
+
+interface MySquareProps {
+  size: number;
+  color: p5.Color
+}
+
+export function MySquare(p: p5, { size, color }: MySquareProps) {
+  return (x: number, y: number) => {
     // p.push();
     p.fill(color);
     p.rect(x, y, size, size);

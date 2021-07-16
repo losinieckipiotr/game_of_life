@@ -1,18 +1,17 @@
-import { makeObservable, observable, computed, action } from "mobx";
+import { action, computed, makeObservable, observable } from "mobx";
+import { CellList } from "./CellList2";
 
 class Store {
+  // simple props
+  firstRender = true;
+  simulate = false;
+
+  // observable
+  simulationRate = 15; // fps
+  iteration = 0;
+  intervalHandle?: number;
+
   constructor() {
-    // simple props
-    this.firstRender = true;
-    this.simulate = false;
-    this.currentCells = null;
-    this.nextCells = null;
-
-    // observable
-    this.simulationRate = 15; // fps
-    this.iteration = 0;
-    this.intervalHandle = undefined;
-
     makeObservable(this, {
       simulationRate: observable,
       iteration: observable,
@@ -31,7 +30,7 @@ class Store {
     return Math.floor(1000 / this.simulationRate); // ms
   }
 
-  updateSimulationRate(simulationRate) {
+  updateSimulationRate(simulationRate: number) {
     this.simulationRate = simulationRate;
   }
 
@@ -43,7 +42,7 @@ class Store {
     this.iteration = 0;
   }
 
-  setupIntervalHandle(intervalHandle) {
+  setupIntervalHandle(intervalHandle: number | undefined) {
     this.intervalHandle = intervalHandle;
   }
 }

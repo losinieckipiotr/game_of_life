@@ -1,21 +1,24 @@
 import { autorun, reaction } from "mobx";
 
+import { p } from "./sketch/types";
+import { Cell } from "./Cell"
+
 import { MySquare } from "./MySquare";
 import { constrain } from "./helpers";
 import { screenSize, frameRate, squareSize, boardSize } from "./enums";
 import { CellList } from "./CellList2";
 import { store } from "./Store";
 
-export function Board(p) {
+export function Board(p: p) {
   p.frameRate(frameRate);
 
   // const screenSize = [p.windowWidth, p.windowHeight];
   p.createCanvas(...screenSize);
 
   p.createP();
-  const toggleButton = p.createButton();
+  const toggleButton = p.createButton('');
   const resetButton = p.createButton("Reset");
-  const simRateSlider = p.createSlider(1, 30, store.simulationRate, 1);
+  const simRateSlider = p.createSlider(1, 60, store.simulationRate, 1);
 
   const renderBlackSquare = MySquare(p, {
     size: squareSize,
@@ -26,7 +29,7 @@ export function Board(p) {
     color: p.color(224, 224, 224)
   });
 
-  const renderCell = (cell) => {
+  const renderCell = (cell: Cell) => {
     const { alive, x, y } = cell;
     if (alive) {
       renderWhiteSquare(x, y); // side effect
@@ -35,21 +38,23 @@ export function Board(p) {
     }
   };
 
-  store.currentCells = new CellList({ boardSize, squareSize });
+  let currentCells = new CellList({ boardSize, squareSize });
+  let nextCells: CellList = currentCells.clone()
+
   const renderAllCells = () => {
-    store.currentCells.forEach((cell) => {
+    currentCells.forEach((cell) => {
       renderCell(cell);
     });
   };
 
   const gameOfLifeSimulation = () => {
-    store.nextCells = store.currentCells.clone(); // mutation
+    nextCells = currentCells.clone(); // mutation
 
-    store.currentCells.forEach((cell) => {
+    currentCells.forEach((cell) => {
       const { i, j } = cell;
 
-      const futureCell = store.nextCells.getCell(i, j);
-      const aliveNeighbours = store.currentCells.getAliveNeighbours(i, j);
+      const futureCell = nextCells.getCell(i, j);
+      const aliveNeighbours = currentCells.getAliveNeighbours(i, j);
       if (cell.alive) {
         if (aliveNeighbours < 2 || aliveNeighbours > 3) {
           futureCell.alive = false; // mutation
@@ -63,12 +68,13 @@ export function Board(p) {
       }
     });
 
-    store.currentCells = store.nextCells; // mutation
-    store.nextCells = null; // desctruction :)
+    currentCells = nextCells; // mutation
+    // desctruction :)
+    // store.nextCells = null;
   };
 
-  const renderSingleSquare = (i, j, renderAlive) => {
-    const cell = store.currentCells.getCell(i, j);
+  const renderSingleSquare = (i: number, j: number, renderAlive: boolean) => {
+    const cell = currentCells.getCell(i, j);
 
     if (renderAlive !== cell.alive) {
       cell.alive = renderAlive; // mutation
@@ -99,7 +105,7 @@ export function Board(p) {
     // simulationLoop();
     // side effect
     store.setupIntervalHandle(
-      setInterval(setupNextSimulation, store.simulationInterval)
+      window.setInterval(setupNextSimulation, store.simulationInterval)
     );
   };
 
@@ -118,7 +124,7 @@ export function Board(p) {
 
   const reseSimulation = () => {
     stopInterval();
-    store.currentCells.forEach((cell) => {
+    currentCells.forEach((cell) => {
       cell.alive = false;
       renderCell(cell);
     });
@@ -128,7 +134,7 @@ export function Board(p) {
   toggleButton.mouseClicked(toggleSimulation);
   resetButton.mouseClicked(reseSimulation);
   p.keyPressed = () => {
-    if (p.keycode === p.SPACE) {
+    if (p.keyCode === p.ENTER) {
       toggleSimulation();
     }
   };
@@ -167,6 +173,6 @@ export function Board(p) {
       store.firstRender = false;
     }
 
-    store.updateSimulationRate(simRateSlider.value());
+    store.updateSimulationRate(simRateSlider.value() as number);
   };
 }

@@ -1,7 +1,17 @@
 import { Cell } from "./Cell";
 
+interface CellListProps {
+  boardSize: number;
+  squareSize: number;
+  cellsMap?: Array<Array<Cell>>;
+}
+
 export class CellList {
-  constructor({ boardSize, squareSize, cellsMap: oldCellsMap }) {
+  private boardSize: number
+  private squareSize: number;
+  private cellsMap: Array<Array<Cell>>
+
+  constructor({ boardSize, squareSize, cellsMap: oldCellsMap }: CellListProps) {
     this.boardSize = boardSize;
     this.squareSize = squareSize;
     this.cellsMap = new Array(boardSize);
@@ -33,7 +43,7 @@ export class CellList {
     });
   }
 
-  forEach(callback) {
+  forEach(callback: (cell: Cell) => void) {
     const { boardSize } = this;
 
     for (let i = 0; i < boardSize; i++) {
@@ -43,11 +53,11 @@ export class CellList {
     }
   }
 
-  getCell(i, j) {
+  getCell(i: number, j: number) {
     return this.cellsMap[i][j];
   }
 
-  getNeighbourVal(i, j) {
+  getNeighbourVal(i: number, j: number) {
     const { boardSize } = this;
     const maxIndex = boardSize - 1;
     if (i < 0 || i > maxIndex || j < 0 || j > maxIndex) {
@@ -57,7 +67,7 @@ export class CellList {
     return cell.alive ? 1 : 0;
   }
 
-  getAliveNeighbours(i, j) {
+  getAliveNeighbours(i: number, j: number) {
     let sum = 0;
 
     sum += this.getNeighbourVal(i - 1, j - 1);

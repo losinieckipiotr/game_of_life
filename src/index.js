@@ -1,3 +1,3 @@
 import "./styles.css";
 
-import "./sketch";
+import "./sketch/start.ts";

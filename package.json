@@ -6,17 +6,25 @@
   "scripts": {
     "start": "parcel index.html --open",
     "build": "parcel build index.html",
-    "test": "web-test-runner \"src/*.test.js\" --node-resolve --coverage",
-    "test:watch": "web-test-runner \"src/**/*.test.js\" --node-resolve --watch"
+    "test": "web-test-runner",
+    "test:watch": "web-test-runner --watch",
+    "check": "tsc --noEmit",
+    "compile": "tsc --outDir ./ts_build"
   },
   "dependencies": {
     "mobx": "^6.3.2",
-    "p5": "^1.4.0",
-    "parcel-bundler": "^1.6.1"
+    "p5": "^1.4.0"
   },
   "keywords": [],
   "devDependencies": {
-    "@esm-bundle/chai": "^4.3.4",
-    "@web/test-runner": "^0.13.13"
+    "@open-wc/testing": "^2.5.33",
+    "@types/p5": "^1.3.0",
+    "@web/dev-server-esbuild": "^0.2.12",
+    "@web/test-runner": "^0.13.13",
+    "chai": "^4.3.4",
+    "parcel-bundler": "^1.12.5",
+    "rimraf": "^3.0.2",
+    "sinon": "^11.1.1",
+    "typescript": "^4.3.5"
   }
 }
