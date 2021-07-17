@@ -6,4 +6,4 @@ export const boardHeight = squareSize * boardSize
 
 export const screenSize: [number, number] = [boardWidth, boardHeight]
 export const frameRate = 60 // fps
-export const defualtSimulationRate = 60 // fps
+export const defaultSimulationRate = 30 // fps
