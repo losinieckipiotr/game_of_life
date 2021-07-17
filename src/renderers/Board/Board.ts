@@ -105,6 +105,9 @@ export function Board(p: p): Renderer {
     }
   }
 
+  p.mousePressed = onMousePressed
+  p.mouseDragged = onMousePressed
+
   const setupNextSimulation = () => {
     store.simulate = true
   }
@@ -166,14 +169,14 @@ export function Board(p: p): Renderer {
   })
 
   return () => {
+    if (p.mouseIsPressed) {
+      onMousePressed()
+    }
+
     if (store.simulate) {
       gameOfLifeSimulation()
       store.incrementIteration()
       store.simulate = false
-    }
-
-    if (p.mouseIsPressed) {
-      onMousePressed()
     }
 
     if (store.firstRender) {
