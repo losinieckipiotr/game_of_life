@@ -1,4 +1,4 @@
-import { p, Renderer } from "./types"
+import { p, Renderer } from './types'
 
 export function draw(p: p, renderers: Renderer[]) {
   return (): void => {

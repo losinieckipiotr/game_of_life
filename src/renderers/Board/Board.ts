@@ -1,13 +1,13 @@
-import { autorun, reaction } from "mobx"
+import { autorun, reaction } from 'mobx'
 
-import { p, Renderer } from "../../sketch/types"
-import { Cell } from "../../structs/Cell"
+import { p, Renderer } from '../../sketch/types'
+import { Cell } from '../../structs/Cell'
 
-import { MySquare } from "../MySquare"
-import { constrain } from "../../utils/helpers"
-import { screenSize, frameRate, squareSize, boardSize } from "../../utils/enums"
-import { CellList } from "../../structs/CellList"
-import { store } from "../../store"
+import { MySquare } from '../MySquare'
+import { constrain } from '../../utils/helpers'
+import { screenSize, frameRate, squareSize, boardSize } from '../../utils/enums'
+import { CellList } from '../../structs/CellList'
+import { store } from '../../store'
 
 export function Board(p: p): Renderer {
   p.frameRate(frameRate)
@@ -17,7 +17,7 @@ export function Board(p: p): Renderer {
 
   p.createP()
   const toggleButton = p.createButton('')
-  const resetButton = p.createButton("Reset")
+  const resetButton = p.createButton('Reset')
   const simRateSlider = p.createSlider(1, 60, store.simulationRate, 1)
 
   const renderBlackSquare = MySquare(p, {
@@ -151,9 +151,9 @@ export function Board(p: p): Renderer {
 
   autorun(() => {
     if (store.intervalHandle) {
-      toggleButton.html("Stop simulation")
+      toggleButton.html('Stop simulation')
     } else {
-      toggleButton.html("Start simulation")
+      toggleButton.html('Start simulation')
     }
   })
 

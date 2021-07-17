@@ -1,8 +1,8 @@
 import { expect } from '@open-wc/testing'
-import { Cell } from "./Cell"
+import { Cell } from './Cell'
 
 describe('Cell tests', () => {
-  it("Should cell valid props", () => {
+  it('Should cell valid props', () => {
     const cell = new Cell({
       i: 0,
       j: 0,
@@ -19,7 +19,7 @@ describe('Cell tests', () => {
   })
 
 
-  it("Should create real case cell with valid props", () => {
+  it('Should create real case cell with valid props', () => {
     const cell = new Cell({
       i: 2,
       j: 3,
@@ -34,7 +34,7 @@ describe('Cell tests', () => {
     expect(cell.alive).to.be.true
   })
 
-  it("Should clone cell", () => {
+  it('Should clone cell', () => {
     const cell1 = new Cell({
       i: 2,
       j: 3,

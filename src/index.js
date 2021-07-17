@@ -1,3 +1,3 @@
-import "./styles.css"
+import './styles.css'
 
-import "./sketch/start.ts"
+import './sketch/start.ts'

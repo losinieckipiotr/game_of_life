@@ -1,9 +1,9 @@
-import p5 from "p5"
+import p5 from 'p5'
 
-import { Renderer } from "./types"
+import { Renderer } from './types'
 
-import { setup } from "./setup"
-import { draw } from "./draw"
+import { setup } from './setup'
+import { draw } from './draw'
 
 const sketch = function (p: p5) {
   const renderers: Renderer[] = []
@@ -12,5 +12,5 @@ const sketch = function (p: p5) {
   p.draw = draw(p, renderers)
 }
 
-const appNode = document.querySelector("#skechtContainer") as HTMLDivElement
+const appNode = document.querySelector('#skechtContainer') as HTMLDivElement
 new p5(sketch, appNode)
