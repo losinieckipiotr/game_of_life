@@ -72,7 +72,7 @@
         "prefer-template":"error",
         "rest-spread-spacing":"error",
         "template-curly-spacing":"error",
-        "dot-location": "error",
+        "dot-location": ["error", "property"],
         "dot-notation": "error",
         "eqeqeq": "error",
         "no-else-return": "error",

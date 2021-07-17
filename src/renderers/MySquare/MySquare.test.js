@@ -3,29 +3,26 @@ import { spy } from 'sinon'
 
 import { MySquare } from './MySquare'
 
-const pMock = {
-  fill: spy(),
-  rect: spy()
-}
-
 describe('MySquare tests', () => {
-  beforeEach(() => {
-    pMock.fill.resetHistory()
-    pMock.rect.resetHistory()
-  })
+  it('should call p5 methods with valid args', () => {
+    const pMock = {
+      fill: spy(),
+      rect: spy()
+    }
+    const { fill, rect } = pMock
+    const fakeColorObj = {}
 
-  it('should render square', () => {
-    const {
+    const renderer = MySquare({
       fill,
       rect
-    } = pMock
-    const fakeColorObj = {}
-    const renderer = MySquare(pMock, { size: 10, color: fakeColorObj })
-
+    }, {
+      size: 10,
+      color: fakeColorObj
+    })
     renderer(0, 0)
 
     expect(fill).to.have.been.calledOnce
-    expect(fill.getCall(0).args[0]).to.be.equal(fakeColorObj)
-    expect(rect).to.have.been.calledOnce
+    expect(fill).to.have.been.calledOnceWith(fakeColorObj)
+    expect(rect).to.have.been.calledOnceWith(0, 0, 10, 10)
   })
 })
