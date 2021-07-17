@@ -1,7 +1,7 @@
 import { p, renderer } from "./types"
 
-import { Controls } from "../Controls";
-import { Board } from "../Board";
+import { Controls } from "../renderers/Controls";
+import { Board } from "../renderers/Board";
 
 export function setup(p: p, renderers: renderer[]) {
   return () => {

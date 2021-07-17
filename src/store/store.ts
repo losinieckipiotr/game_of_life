@@ -1,5 +1,4 @@
 import { action, computed, makeObservable, observable } from "mobx";
-import { CellList } from "./CellList2";
 
 class Store {
   // simple props

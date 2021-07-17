@@ -1,13 +1,13 @@
 import { autorun, reaction } from "mobx";
 
-import { p } from "./sketch/types";
-import { Cell } from "./Cell"
+import { p } from "../../sketch/types";
+import { Cell } from "../../structs/Cell"
 
-import { MySquare } from "./MySquare";
-import { constrain } from "./helpers";
-import { screenSize, frameRate, squareSize, boardSize } from "./enums";
-import { CellList } from "./CellList2";
-import { store } from "./Store";
+import { MySquare } from "../MySquare";
+import { constrain } from "../../utils/helpers";
+import { screenSize, frameRate, squareSize, boardSize } from "../../utils/enums";
+import { CellList } from "../../structs/CellList";
+import { store } from "../../store";
 
 export function Board(p: p) {
   p.frameRate(frameRate);

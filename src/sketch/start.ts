@@ -1,6 +1,6 @@
 import p5 from "p5"
 
-import { p, renderer } from "./types"
+import { renderer } from "./types"
 
 import { setup } from "./setup";
 import { draw } from "./draw";
