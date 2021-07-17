@@ -37,6 +37,41 @@
         "max-params": ["error", 2],
         "max-statements-per-line":"error",
         "no-lonely-if":"error",
+        "no-mixed-operators":"error",
+        "no-multi-assign":"error",
+        "no-multiple-empty-lines":"error",
+        "no-trailing-spaces":"error",
+        "no-unneeded-ternary":"error",
+        "no-whitespace-before-property":"error",
+        "object-curly-spacing": ["error", "always"],
+        "one-var-declaration-per-line":"error",
+        "operator-assignment":"error",
+        "operator-linebreak":["error", "after", { "overrides": { "?": "before", ":": "before" } }],
+        "prefer-exponentiation-operator":"error",
+        "prefer-object-spread":"error",
+        "quote-props":["error", "as-needed"],
+        "space-before-blocks":"error",
+        "space-before-function-paren":["error", "never"],
+        "space-in-parens":"error",
+        "space-infix-ops":"error",
+        "space-unary-ops": "error",
+        "spaced-comment":"error",
+        "switch-colon-spacing":"error",
+        "template-tag-spacing":"error",
+        "arrow-spacing":"error",
+        "generator-star-spacing":"error",
+        "no-confusing-arrow":"error",
+        "no-duplicate-imports":"error",
+        "no-useless-constructor":"error",
+        "no-useless-rename":"error",
+        "no-var":"error",
+        "object-shorthand":"error",
+        "prefer-arrow-callback":"error",
+        "prefer-const":"error",
+        "prefer-destructuring":"error",
+        "prefer-template":"error",
+        "rest-spread-spacing":"error",
+        "template-curly-spacing":"error",
         "dot-location": "error",
         "dot-notation": "error",
         "eqeqeq": "error",
@@ -51,10 +86,13 @@
     "overrides": [
         {
           "files": ["*.test.js"],
+          "env": {
+              "mocha": true
+          },
           "rules": {
-            "no-unused-expressions": "off",
-            "no-undef": "off"
+            "no-unused-expressions": "off"
           }
         }
-      ]
+      ],
+      "ignorePatterns": ["**/ts_build/**/*.js"]
 }
