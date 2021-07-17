@@ -1,13 +1,17 @@
 import { autorun, reaction } from 'mobx'
 
 import { p, Renderer } from '../../sketch/types'
-import { Cell } from '../../structs/Cell'
-
-import { MySquare } from '../MySquare'
-import { constrain } from '../../utils/helpers'
-import { screenSize, frameRate, squareSize, boardSize } from '../../utils/enums'
-import { CellList } from '../../structs/CellList'
 import { store } from '../../store'
+import { Cell } from '../../structs/Cell'
+import { CellList } from '../../structs/CellList'
+import {
+  boardSize,
+  frameRate,
+  screenSize,
+  squareSize
+} from '../../utils/enums'
+import { constrain } from '../../utils/helpers'
+import { MySquare } from '../MySquare'
 
 export function Board(p: p): Renderer {
   p.frameRate(frameRate)
@@ -60,11 +64,9 @@ export function Board(p: p): Renderer {
           futureCell.alive = false // mutation
           renderCell(futureCell)
         }
-      } else {
-        if (aliveNeighbours === 3) {
-          futureCell.alive = true // mutation
-          renderCell(futureCell)
-        }
+      } else if (aliveNeighbours === 3) {
+        futureCell.alive = true // mutation
+        renderCell(futureCell)
       }
     })
 
@@ -73,9 +75,7 @@ export function Board(p: p): Renderer {
     // store.nextCells = null;
   }
 
-  const renderSingleSquare = (i: number, j: number, renderAlive: boolean) => {
-    const cell = currentCells.getCell(i, j)
-
+  const renderSingleSquare = (cell: Cell, renderAlive: boolean) => {
     if (renderAlive !== cell.alive) {
       cell.alive = renderAlive // mutation
       renderCell(cell)
@@ -83,17 +83,25 @@ export function Board(p: p): Renderer {
   }
 
   const onMousePressed = () => {
-    const i = constrain(Math.floor(p.mouseX / squareSize), 0, boardSize - 1)
-    const j = constrain(Math.floor(p.mouseY / squareSize), 0, boardSize - 1)
+    const minMax: [number, number] = [0, boardSize - 1]
+    const i = constrain(
+      Math.floor(p.mouseX / squareSize),
+      minMax
+    )
+    const j = constrain(
+      Math.floor(p.mouseY / squareSize),
+      minMax
+    )
 
     if (isNaN(i) || isNaN(j)) {
       return
     }
 
+    const cell = currentCells.getCell(i, j)
     if (p.mouseButton === p.LEFT) {
-      renderSingleSquare(i, j, true)
+      renderSingleSquare(cell, true)
     } else if (p.mouseButton === p.RIGHT) {
-      renderSingleSquare(i, j, false)
+      renderSingleSquare(cell, false)
     }
   }
 

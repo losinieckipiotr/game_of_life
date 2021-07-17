@@ -1,4 +1,5 @@
 import { action, computed, makeObservable, observable } from 'mobx'
+import { defualtSimulationRate } from '../utils/enums'
 
 class Store {
   // simple props
@@ -6,7 +7,7 @@ class Store {
   simulate = false;
 
   // observable
-  simulationRate = 15; // fps
+  simulationRate = defualtSimulationRate; // fps
   iteration = 0;
   intervalHandle?: number;
 

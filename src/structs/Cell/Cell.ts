@@ -8,10 +8,15 @@ interface CellParams {
 }
 
 export class Cell {
+  /** col index number */
   public i: number;
+  /** row index number */
   public j: number;
+  /** render coordinate horizontal */
   public x: number;
+  /** render cooridnate vertical */
   public y: number;
+  /** is cell is alive */
   public alive: boolean;
 
   constructor({
@@ -22,11 +27,11 @@ export class Cell {
     squareSize,
     alive
   }: CellParams) {
-    this.i = i // col
-    this.j = j // row
+    this.i = i
+    this.j = j
 
-    this.x = x !== undefined ? x : i * (squareSize as number) // render square x coordinate
-    this.y = y !== undefined ? y : j * (squareSize as number) // render square y coordinate
+    this.x = x !== undefined ? x : i * (squareSize as number)
+    this.y = y !== undefined ? y : j * (squareSize as number)
 
     this.alive = !!alive
   }
