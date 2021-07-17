@@ -1,4 +1,4 @@
-import { action, computed, makeObservable, observable } from "mobx";
+import { action, computed, makeObservable, observable } from "mobx"
 
 class Store {
   // simple props
@@ -22,28 +22,28 @@ class Store {
       incrementIteration: action,
       resetIteration: action,
       setupIntervalHandle: action
-    });
+    })
   }
 
   get simulationInterval() {
-    return Math.floor(1000 / this.simulationRate); // ms
+    return Math.floor(1000 / this.simulationRate) // ms
   }
 
   updateSimulationRate(simulationRate: number) {
-    this.simulationRate = simulationRate;
+    this.simulationRate = simulationRate
   }
 
   incrementIteration() {
-    ++this.iteration;
+    ++this.iteration
   }
 
   resetIteration() {
-    this.iteration = 0;
+    this.iteration = 0
   }
 
   setupIntervalHandle(intervalHandle: number | undefined) {
-    this.intervalHandle = intervalHandle;
+    this.intervalHandle = intervalHandle
   }
 }
 
-export const store = new Store();
+export const store = new Store()

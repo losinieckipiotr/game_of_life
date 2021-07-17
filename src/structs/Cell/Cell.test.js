@@ -1,5 +1,5 @@
-import { expect } from '@open-wc/testing';
-import { Cell } from "./Cell";
+import { expect } from '@open-wc/testing'
+import { Cell } from "./Cell"
 
 describe('Cell tests', () => {
   it("Should cell valid props", () => {
@@ -9,14 +9,14 @@ describe('Cell tests', () => {
       x: 0,
       y: 0,
       alive: false
-    });
+    })
 
     expect(cell.i).to.be.equal(0)
     expect(cell.j).to.be.equal(0)
     expect(cell.x).to.be.equal(0)
     expect(cell.y).to.be.equal(0)
     expect(cell.alive).to.be.false
-  });
+  })
 
 
   it("Should create real case cell with valid props", () => {
@@ -25,14 +25,14 @@ describe('Cell tests', () => {
       j: 3,
       squareSize: 10,
       alive: true
-    });
+    })
 
     expect(cell.i).to.be.equal(2)
     expect(cell.j).to.be.equal(3)
     expect(cell.x).to.be.equal(20)
     expect(cell.y).to.be.equal(30)
     expect(cell.alive).to.be.true
-  });
+  })
 
   it("Should clone cell", () => {
     const cell1 = new Cell({
@@ -40,7 +40,7 @@ describe('Cell tests', () => {
       j: 3,
       squareSize: 10,
       alive: true
-    });
+    })
     const cell2 = cell1.clone()
 
     expect(cell1).to.be.deep.equal(cell2)

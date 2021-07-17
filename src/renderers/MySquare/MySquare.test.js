@@ -1,5 +1,5 @@
-import { expect } from '@open-wc/testing';
-import { spy } from 'sinon';
+import { expect } from '@open-wc/testing'
+import { spy } from 'sinon'
 
 import { MySquare } from './MySquare'
 
@@ -26,6 +26,6 @@ describe('MySquare tests', () => {
 
     expect(fill).to.have.been.calledOnce
     expect(fill.getCall(0).args[0]).to.be.equal(fakeColorObj)
-    expect(pMock.rect).to.have.been.calledOnce
+    expect(rect).to.have.been.calledOnce
   })
 })

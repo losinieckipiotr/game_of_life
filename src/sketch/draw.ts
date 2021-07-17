@@ -1,9 +1,9 @@
-import { p, renderer } from "./types"
+import { p, Renderer } from "./types"
 
-export function draw(p: p, renderers: renderer[]) {
-  return () => {
+export function draw(p: p, renderers: Renderer[]) {
+  return (): void => {
     renderers.forEach((render) => {
-      render();
-    });
-  };
+      render()
+    })
+  }
 }

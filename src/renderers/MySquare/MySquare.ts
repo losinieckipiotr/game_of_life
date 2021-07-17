@@ -6,12 +6,12 @@ interface MySquareProps {
 }
 
 export function MySquare(p: p5, { size, color }: MySquareProps) {
-  return (x: number, y: number) => {
+  return (x: number, y: number): void => {
     // p.push();
-    p.fill(color);
-    p.rect(x, y, size, size);
+    p.fill(color)
+    p.rect(x, y, size, size)
     // p.pop();
-  };
+  }
 }
 
 // export function moveHorizontal(p, { start, moveBy }) {

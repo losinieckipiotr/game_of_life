@@ -1,4 +1,6 @@
-import { Cell } from "./Cell";
+import { Cell } from "./Cell"
+
+/* eslint-disable */
 
 export class CellList {
   constructor({ boardSize, squareSize, cellsMap }) {

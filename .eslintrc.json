@@ -16,5 +16,18 @@
         "@typescript-eslint"
     ],
     "rules": {
-    }
+        "semi": ["error", "never"],
+        // note you must disable the base rule as it can report incorrect errors
+        "no-empty-function": "off",
+        "@typescript-eslint/no-empty-function": ["off"]
+    },
+    "overrides": [
+        {
+          "files": ["*.test.js"],
+          "rules": {
+            "no-unused-expressions": "off",
+            "no-undef": "off"
+          }
+        }
+      ]
 }

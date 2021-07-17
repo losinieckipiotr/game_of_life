@@ -1,178 +1,178 @@
-import { autorun, reaction } from "mobx";
+import { autorun, reaction } from "mobx"
 
-import { p } from "../../sketch/types";
+import { p, Renderer } from "../../sketch/types"
 import { Cell } from "../../structs/Cell"
 
-import { MySquare } from "../MySquare";
-import { constrain } from "../../utils/helpers";
-import { screenSize, frameRate, squareSize, boardSize } from "../../utils/enums";
-import { CellList } from "../../structs/CellList";
-import { store } from "../../store";
+import { MySquare } from "../MySquare"
+import { constrain } from "../../utils/helpers"
+import { screenSize, frameRate, squareSize, boardSize } from "../../utils/enums"
+import { CellList } from "../../structs/CellList"
+import { store } from "../../store"
 
-export function Board(p: p) {
-  p.frameRate(frameRate);
+export function Board(p: p): Renderer {
+  p.frameRate(frameRate)
 
   // const screenSize = [p.windowWidth, p.windowHeight];
-  p.createCanvas(...screenSize);
+  p.createCanvas(...screenSize)
 
-  p.createP();
-  const toggleButton = p.createButton('');
-  const resetButton = p.createButton("Reset");
-  const simRateSlider = p.createSlider(1, 60, store.simulationRate, 1);
+  p.createP()
+  const toggleButton = p.createButton('')
+  const resetButton = p.createButton("Reset")
+  const simRateSlider = p.createSlider(1, 60, store.simulationRate, 1)
 
   const renderBlackSquare = MySquare(p, {
     size: squareSize,
     color: p.color(64, 64, 64)
-  });
+  })
   const renderWhiteSquare = MySquare(p, {
     size: squareSize,
     color: p.color(224, 224, 224)
-  });
+  })
 
   const renderCell = (cell: Cell) => {
-    const { alive, x, y } = cell;
+    const { alive, x, y } = cell
     if (alive) {
-      renderWhiteSquare(x, y); // side effect
+      renderWhiteSquare(x, y) // side effect
     } else {
-      renderBlackSquare(x, y); // side effect
+      renderBlackSquare(x, y) // side effect
     }
-  };
+  }
 
-  let currentCells = new CellList({ boardSize, squareSize });
+  let currentCells = new CellList({ boardSize, squareSize })
   let nextCells: CellList = currentCells.clone()
 
   const renderAllCells = () => {
     currentCells.forEach((cell) => {
-      renderCell(cell);
-    });
-  };
+      renderCell(cell)
+    })
+  }
 
   const gameOfLifeSimulation = () => {
-    nextCells = currentCells.clone(); // mutation
+    nextCells = currentCells.clone() // mutation
 
     currentCells.forEach((cell) => {
-      const { i, j } = cell;
+      const { i, j } = cell
 
-      const futureCell = nextCells.getCell(i, j);
-      const aliveNeighbours = currentCells.getAliveNeighbours(i, j);
+      const futureCell = nextCells.getCell(i, j)
+      const aliveNeighbours = currentCells.getAliveNeighbours(i, j)
       if (cell.alive) {
         if (aliveNeighbours < 2 || aliveNeighbours > 3) {
-          futureCell.alive = false; // mutation
-          renderCell(futureCell);
+          futureCell.alive = false // mutation
+          renderCell(futureCell)
         }
       } else {
         if (aliveNeighbours === 3) {
-          futureCell.alive = true; // mutation
-          renderCell(futureCell);
+          futureCell.alive = true // mutation
+          renderCell(futureCell)
         }
       }
-    });
+    })
 
-    currentCells = nextCells; // mutation
+    currentCells = nextCells // mutation
     // desctruction :)
     // store.nextCells = null;
-  };
+  }
 
   const renderSingleSquare = (i: number, j: number, renderAlive: boolean) => {
-    const cell = currentCells.getCell(i, j);
+    const cell = currentCells.getCell(i, j)
 
     if (renderAlive !== cell.alive) {
-      cell.alive = renderAlive; // mutation
-      renderCell(cell);
+      cell.alive = renderAlive // mutation
+      renderCell(cell)
     }
-  };
+  }
 
   const onMousePressed = () => {
-    const i = constrain(Math.floor(p.mouseX / squareSize), 0, boardSize - 1);
-    const j = constrain(Math.floor(p.mouseY / squareSize), 0, boardSize - 1);
+    const i = constrain(Math.floor(p.mouseX / squareSize), 0, boardSize - 1)
+    const j = constrain(Math.floor(p.mouseY / squareSize), 0, boardSize - 1)
 
     if (isNaN(i) || isNaN(j)) {
-      return;
+      return
     }
 
     if (p.mouseButton === p.LEFT) {
-      renderSingleSquare(i, j, true);
+      renderSingleSquare(i, j, true)
     } else if (p.mouseButton === p.RIGHT) {
-      renderSingleSquare(i, j, false);
+      renderSingleSquare(i, j, false)
     }
-  };
+  }
 
   const setupNextSimulation = () => {
-    store.simulate = true;
-  };
+    store.simulate = true
+  }
 
   const startInterval = () => {
     // simulationLoop();
     // side effect
     store.setupIntervalHandle(
       window.setInterval(setupNextSimulation, store.simulationInterval)
-    );
-  };
+    )
+  }
 
   const stopInterval = () => {
-    clearInterval(store.intervalHandle); // side effect
-    store.setupIntervalHandle(undefined);
-  };
+    clearInterval(store.intervalHandle) // side effect
+    store.setupIntervalHandle(undefined)
+  }
 
   const toggleSimulation = () => {
     if (store.intervalHandle === undefined) {
-      startInterval();
+      startInterval()
     } else {
-      stopInterval();
+      stopInterval()
     }
-  };
+  }
 
   const reseSimulation = () => {
-    stopInterval();
+    stopInterval()
     currentCells.forEach((cell) => {
-      cell.alive = false;
-      renderCell(cell);
-    });
-    store.resetIteration();
-  };
+      cell.alive = false
+      renderCell(cell)
+    })
+    store.resetIteration()
+  }
 
-  toggleButton.mouseClicked(toggleSimulation);
-  resetButton.mouseClicked(reseSimulation);
+  toggleButton.mouseClicked(toggleSimulation)
+  resetButton.mouseClicked(reseSimulation)
   p.keyPressed = () => {
     if (p.keyCode === p.ENTER) {
-      toggleSimulation();
+      toggleSimulation()
     }
-  };
+  }
 
   reaction(
     () => store.simulationRate,
     () => {
       if (store.intervalHandle) {
-        stopInterval();
-        startInterval();
+        stopInterval()
+        startInterval()
       }
     }
-  );
+  )
 
   autorun(() => {
     if (store.intervalHandle) {
-      toggleButton.html("Stop simulation");
+      toggleButton.html("Stop simulation")
     } else {
-      toggleButton.html("Start simulation");
+      toggleButton.html("Start simulation")
     }
-  });
+  })
 
   return () => {
     if (store.simulate) {
-      gameOfLifeSimulation();
-      store.incrementIteration();
-      store.simulate = false;
+      gameOfLifeSimulation()
+      store.incrementIteration()
+      store.simulate = false
     }
 
     if (p.mouseIsPressed) {
-      onMousePressed();
+      onMousePressed()
     }
 
     if (store.firstRender) {
-      renderAllCells();
-      store.firstRender = false;
+      renderAllCells()
+      store.firstRender = false
     }
 
-    store.updateSimulationRate(simRateSlider.value() as number);
-  };
+    store.updateSimulationRate(simRateSlider.value() as number)
+  }
 }

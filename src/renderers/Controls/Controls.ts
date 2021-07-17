@@ -1,26 +1,26 @@
-import { autorun } from "mobx";
-import { store } from "../../store";
-import { p } from "../../sketch/types"
+import { autorun } from "mobx"
+import { store } from "../../store"
+import { p, Renderer } from "../../sketch/types"
 
-export function Controls(p: p) {
-  const messagesParagraph = p.createP();
-  messagesParagraph.addClass("messages-paragraph");
+export function Controls(p: p): Renderer {
+  const messagesParagraph = p.createP()
+  messagesParagraph.addClass("messages-paragraph")
 
-  const iterationSpan = p.createSpan();
-  iterationSpan.addClass("msg");
-  iterationSpan.parent(messagesParagraph);
+  const iterationSpan = p.createSpan()
+  iterationSpan.addClass("msg")
+  iterationSpan.parent(messagesParagraph)
 
-  const simulationRateSpan = p.createSpan();
-  simulationRateSpan.addClass("msg");
-  simulationRateSpan.parent(messagesParagraph);
-
-  autorun(() => {
-    iterationSpan.html(`Iteration: ${store.iteration}`);
-  });
+  const simulationRateSpan = p.createSpan()
+  simulationRateSpan.addClass("msg")
+  simulationRateSpan.parent(messagesParagraph)
 
   autorun(() => {
-    simulationRateSpan.html(`Simulation rate: ${store.simulationRate}`);
-  });
+    iterationSpan.html(`Iteration: ${store.iteration}`)
+  })
 
-  return () => {};
+  autorun(() => {
+    simulationRateSpan.html(`Simulation rate: ${store.simulationRate}`)
+  })
+
+  return () => {}
 }

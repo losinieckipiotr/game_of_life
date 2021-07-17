@@ -1,9 +1,9 @@
-export function constrain(number: number, min: number, max: number) {
+export function constrain(number: number, min: number, max: number): number {
   if (number < min) {
-    return NaN;
+    return NaN
   }
   if (number > max) {
-    return NaN;
+    return NaN
   }
-  return number;
+  return number
 }
