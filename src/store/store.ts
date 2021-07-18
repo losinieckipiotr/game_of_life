@@ -3,13 +3,13 @@ import { defaultSimulationRate } from '../enums'
 
 export class Store {
   // simple props
-  firstRender = true;
-  simulate = false;
+  firstRender = true
+  simulate = false
 
   // observable
-  simulationRate = defaultSimulationRate; // fps
-  iteration = 0;
-  intervalHandle?: number;
+  simulationRate = defaultSimulationRate // fps
+  iteration = 0
+  intervalHandle?: number
 
   constructor () {
     makeObservable(this, {
@@ -19,20 +19,15 @@ export class Store {
 
       simulationInterval: computed,
 
-      updateSimulationRate: action,
       incrementIteration: action,
       resetIteration: action,
-      setupIntervalHandle: action
+      setIntervalHandle: action
     })
   }
 
   get simulationInterval (): number {
     const second = 1000
     return Math.floor(second / this.simulationRate)
-  }
-
-  updateSimulationRate (simulationRate: number): void {
-    this.simulationRate = simulationRate
   }
 
   incrementIteration (): void {
@@ -43,7 +38,7 @@ export class Store {
     this.iteration = 0
   }
 
-  setupIntervalHandle (intervalHandle: number | undefined): void {
+  setIntervalHandle (intervalHandle: number | undefined): void {
     this.intervalHandle = intervalHandle
   }
 }

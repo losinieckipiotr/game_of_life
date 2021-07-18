@@ -119,14 +119,14 @@ export function Board (p: p, { store }: BoardParams): Renderer {
   const startInterval = () => {
     // simulationLoop();
     // side effect
-    store.setupIntervalHandle(
+    store.setIntervalHandle(
       window.setInterval(setupNextSimulation, store.simulationInterval)
     )
   }
 
   const stopInterval = () => {
     clearInterval(store.intervalHandle) // side effect
-    store.setupIntervalHandle(undefined)
+    store.setIntervalHandle(undefined)
   }
 
   const toggleSimulation = () => {
@@ -188,6 +188,6 @@ export function Board (p: p, { store }: BoardParams): Renderer {
       store.firstRender = false
     }
 
-    store.updateSimulationRate(simRateSlider.value() as number)
+    store.simulationRate = Number(simRateSlider.value())
   }
 }
