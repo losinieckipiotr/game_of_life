@@ -5,9 +5,9 @@ import { start } from './start'
 
 describe('start', () => {
   it('should return function that setups p5', () => {
-    const setupStub = {}
-    const drawStub = {}
-    const p5Stub = {}
+    const setupStub = { name: 'setup' }
+    const drawStub = { name: 'draw' }
+    const p5Stub = { name: 'p5' }
 
     const setup = stub().returns(setupStub)
     const draw = stub().returns(drawStub)

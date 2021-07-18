@@ -94,5 +94,5 @@
           }
         }
       ],
-      "ignorePatterns": ["**/ts_build/**/*.js", "**/mocks/**/*.js"]
+      "ignorePatterns": ["**/ts_build/**/*.js"]
 }

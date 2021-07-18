@@ -1,7 +1,7 @@
 import { action, computed, makeObservable, observable } from 'mobx'
 import { defaultSimulationRate } from '../utils/enums'
 
-class Store {
+export class Store {
   // simple props
   firstRender = true;
   simulate = false;
@@ -26,25 +26,24 @@ class Store {
     })
   }
 
-  get simulationInterval () {
-    return Math.floor(1000 / this.simulationRate) // ms
+  get simulationInterval (): number {
+    const second = 1000
+    return Math.floor(second / this.simulationRate)
   }
 
-  updateSimulationRate (simulationRate: number) {
+  updateSimulationRate (simulationRate: number): void {
     this.simulationRate = simulationRate
   }
 
-  incrementIteration () {
+  incrementIteration (): void {
     ++this.iteration
   }
 
-  resetIteration () {
+  resetIteration (): void {
     this.iteration = 0
   }
 
-  setupIntervalHandle (intervalHandle: number | undefined) {
+  setupIntervalHandle (intervalHandle: number | undefined): void {
     this.intervalHandle = intervalHandle
   }
 }
-
-export const store = new Store()

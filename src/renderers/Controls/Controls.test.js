@@ -1,7 +1,7 @@
 import { expect } from '@open-wc/testing'
 import { spy, stub } from 'sinon'
 import { Controls } from './Controls'
-import { store } from '../../store'
+import { Store } from '../../store'
 
 // mocked modules
 import { autorun } from 'mobx'
@@ -28,7 +28,8 @@ describe('Controls renderer', () => {
           .onCall(1).returns(secondSpan)
       )
     }
-    Controls(pMock)
+    const store = new Store()
+    Controls(pMock, { store })
 
     expect(pMock.createP).to.have.been.calledOnce
     expect(pMock.createSpan).to.have.been.calledTwice

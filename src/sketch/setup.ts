@@ -1,10 +1,10 @@
 import { Board } from '../renderers/Board'
 import { Controls } from '../renderers/Controls'
-import { p, Renderer, SetupRendererI } from './types'
+import { p, SetupRendererI } from './types'
 
-export const setup: SetupRendererI = (p: p, renderers: Renderer[]) => {
+export const setup: SetupRendererI = (p: p, { renderers, store }) => {
   return () => {
-    renderers.push(Board(p))
-    renderers.push(Controls(p))
+    renderers.push(Board(p, { store }))
+    renderers.push(Controls(p, { store }))
   }
 }

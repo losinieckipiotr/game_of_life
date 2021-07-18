@@ -1,7 +1,7 @@
 import { autorun, reaction } from 'mobx'
 
 import { p, Renderer } from '../../sketch/types'
-import { store } from '../../store'
+import { Store } from '../../store'
 import { Cell } from '../../structs/Cell'
 import { CellList } from '../../structs/CellList'
 import {
@@ -13,7 +13,11 @@ import {
 import { constrain } from '../../utils/helpers'
 import { MySquare } from '../MySquare'
 
-export function Board (p: p): Renderer {
+interface BoardParams {
+  store: Store
+}
+
+export function Board (p: p, { store }: BoardParams): Renderer {
   p.frameRate(frameRate)
 
   // const screenSize = [p.windowWidth, p.windowHeight];

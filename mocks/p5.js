@@ -5,7 +5,7 @@ class p5 {
   setup
   draw
 
-  constructor(sketch, node) {
+  constructor (sketch, node) {
     // should set setup and draw callbacks
     sketch(this)
 
