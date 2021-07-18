@@ -1,6 +1,6 @@
-import { p, Renderer } from './types'
+import { p, Renderer, SetupRendererI } from './types'
 
-export function draw (p: p, renderers: Renderer[]) {
+export const draw: SetupRendererI = (p: p, renderers: Renderer[]) => {
   return (): void => {
     renderers.forEach((render) => {
       render()

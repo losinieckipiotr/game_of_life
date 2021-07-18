@@ -11,7 +11,10 @@ export default {
     importMapsPlugin({
       inject: {
         importMap: {
-          imports: { mobx: './mocks/mobx.js' }
+          imports: {
+            mobx: './mocks/mobx.js',
+            p5: './mocks/p5.js'
+          }
         }
       }
     })
