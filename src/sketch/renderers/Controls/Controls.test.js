@@ -1,7 +1,7 @@
 import { expect } from '@open-wc/testing'
 import { spy, stub } from 'sinon'
 import { Controls } from './Controls'
-import { Store } from '../../store'
+import { Store } from '../../../store'
 
 // mocked modules
 import { autorun } from 'mobx'

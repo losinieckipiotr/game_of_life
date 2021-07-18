@@ -1,16 +1,16 @@
 import { autorun, reaction } from 'mobx'
 
-import { p, Renderer } from '../../sketch/types'
-import { Store } from '../../store'
-import { Cell } from '../../structs/Cell'
-import { CellList } from '../../structs/CellList'
+import { p, Renderer } from '../../types'
+import { Store } from '../../../store'
+import { Cell } from './structs/Cell'
+import { CellList } from './structs/CellList'
 import {
   boardSize,
   frameRate,
   screenSize,
   squareSize
-} from '../../utils/enums'
-import { constrain } from '../../utils/helpers'
+} from '../../../enums'
+import { constrain } from './helpers'
 import { MySquare } from '../MySquare'
 
 interface BoardParams {

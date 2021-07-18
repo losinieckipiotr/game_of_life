@@ -1,5 +1,5 @@
 import { action, computed, makeObservable, observable } from 'mobx'
-import { defaultSimulationRate } from '../utils/enums'
+import { defaultSimulationRate } from '../enums'
 
 export class Store {
   // simple props
