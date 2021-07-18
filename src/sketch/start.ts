@@ -1,5 +1,5 @@
 import { p, Renderer, SetupRendererI } from './types'
-import { Store } from '../store'
+import { Store } from '../Store'
 
 export const start = (setup: SetupRendererI, draw: SetupRendererI) => {
   return (p: p): void => {

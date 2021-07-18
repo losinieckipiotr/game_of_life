@@ -1,7 +1,7 @@
 import { autorun, reaction } from 'mobx'
 
 import { p, Renderer } from '../../types'
-import { Store } from '../../../store'
+import { Store } from '../../../Store'
 import { Cell } from './structs/Cell'
 import { CellList } from './structs/CellList'
 import {

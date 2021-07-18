@@ -1,5 +1,5 @@
 import { autorun } from 'mobx'
-import { Store } from '../../../store'
+import { Store } from '../../../Store'
 import { p, Renderer } from '../../types'
 
 interface ControlsParams {

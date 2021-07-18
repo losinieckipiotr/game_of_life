@@ -1,5 +1,5 @@
 import p5 from 'p5'
-import { Store } from '../store'
+import { Store } from '../Store'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export type Renderer = (...args: any[]) => void;

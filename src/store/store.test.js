@@ -1,5 +1,5 @@
 import { expect } from '@open-wc/testing'
-import { Store } from './store'
+import { Store } from './Store'
 import { defaultSimulationRate } from '../enums'
 
 // mocked modules
