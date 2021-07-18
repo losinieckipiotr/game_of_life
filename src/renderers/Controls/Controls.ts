@@ -2,7 +2,7 @@ import { autorun } from 'mobx'
 import { store } from '../../store'
 import { p, Renderer } from '../../sketch/types'
 
-export function Controls(p: p): Renderer {
+export function Controls (p: p): Renderer {
   const messagesParagraph = p.createP()
   messagesParagraph.addClass('messages-paragraph')
 

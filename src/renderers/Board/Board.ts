@@ -13,7 +13,7 @@ import {
 import { constrain } from '../../utils/helpers'
 import { MySquare } from '../MySquare'
 
-export function Board(p: p): Renderer {
+export function Board (p: p): Renderer {
   p.frameRate(frameRate)
 
   // const screenSize = [p.windowWidth, p.windowHeight];

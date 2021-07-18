@@ -5,7 +5,7 @@ import { Renderer } from './types'
 import { setup } from './setup'
 import { draw } from './draw'
 
-const sketch = function(p: p5) {
+const sketch = function (p: p5) {
   const renderers: Renderer[] = []
 
   p.setup = setup(p, renderers)

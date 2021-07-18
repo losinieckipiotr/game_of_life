@@ -1,4 +1,4 @@
-export function constrain(number: number, minMax: [number, number]): number {
+export function constrain (number: number, minMax: [number, number]): number {
   const [min, max] = minMax
   if (isNaN(min) || isNaN(max)) {
     return NaN

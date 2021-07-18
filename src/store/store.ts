@@ -11,7 +11,7 @@ class Store {
   iteration = 0;
   intervalHandle?: number;
 
-  constructor() {
+  constructor () {
     makeObservable(this, {
       simulationRate: observable,
       iteration: observable,
@@ -26,23 +26,23 @@ class Store {
     })
   }
 
-  get simulationInterval() {
+  get simulationInterval () {
     return Math.floor(1000 / this.simulationRate) // ms
   }
 
-  updateSimulationRate(simulationRate: number) {
+  updateSimulationRate (simulationRate: number) {
     this.simulationRate = simulationRate
   }
 
-  incrementIteration() {
+  incrementIteration () {
     ++this.iteration
   }
 
-  resetIteration() {
+  resetIteration () {
     this.iteration = 0
   }
 
-  setupIntervalHandle(intervalHandle: number | undefined) {
+  setupIntervalHandle (intervalHandle: number | undefined) {
     this.intervalHandle = intervalHandle
   }
 }

@@ -19,7 +19,7 @@ export class Cell {
   /** is cell is alive */
   public alive: boolean;
 
-  constructor({
+  constructor ({
     i,
     j,
     x,
@@ -36,7 +36,7 @@ export class Cell {
     this.alive = !!alive
   }
 
-  clone(): Cell {
+  clone (): Cell {
     return new Cell({
       i: this.i,
       j: this.j,

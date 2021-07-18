@@ -5,7 +5,7 @@ interface MySquareProps {
   color: p5.Color
 }
 
-export function MySquare(p: p5, { size, color }: MySquareProps) {
+export function MySquare (p: p5, { size, color }: MySquareProps) {
   return (x: number, y: number): void => {
     // p.push();
     p.fill(color)
