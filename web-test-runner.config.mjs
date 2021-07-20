@@ -3,9 +3,12 @@ import { importMapsPlugin } from '@web/dev-server-import-maps'
 
 export default {
   files: 'src/**/*.test.js',
-  concurrency: 10,
+  concurrency: 8,
   nodeResolve: true,
   coverage: true,
+  coverageConfig: {
+    exclude: ['node_modules/**', 'mocks/**']
+  },
   plugins: [
     esbuildPlugin({ ts: true, target: 'auto' }),
     importMapsPlugin({

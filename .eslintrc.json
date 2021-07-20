@@ -88,9 +88,6 @@
           "files": ["*.test.js"],
           "env": {
               "mocha": true
-          },
-          "rules": {
-            "no-unused-expressions": "off"
           }
         }
       ],
