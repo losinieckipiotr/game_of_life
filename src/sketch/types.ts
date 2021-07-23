@@ -7,7 +7,6 @@ export type p = p5;
 export type SetupRendererI = (
   p: p5,
   setupArguments: {
-    renderers: Renderer[],
     store: Store
   }
 ) => () => void

@@ -1,10 +1,12 @@
 import { action, computed, makeObservable, observable } from 'mobx'
 import { defaultSimulationRate } from '../enums'
+import { Renderer } from '../sketch/types'
 
 export class Store {
   // simple props
   firstRender = true
   simulate = false
+  renderers: Renderer[] = []
 
   // observable
   simulationRate = defaultSimulationRate // fps

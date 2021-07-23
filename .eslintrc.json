@@ -88,6 +88,9 @@
           "files": ["*.test.js"],
           "env": {
               "mocha": true
+          },
+          "rules": {
+              "no-undef":"warn"
           }
         }
       ],

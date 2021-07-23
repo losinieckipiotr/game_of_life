@@ -1,15 +1,23 @@
 import { expect } from '@open-wc/testing'
 import { spy } from 'sinon'
+
+import { getP5 } from '../test-helper'
 import { draw } from './draw'
+import { Store } from '../Store'
 
 describe('draw', () => {
+  let p
+  before(() => {
+    p = getP5()
+  })
+
   it('should return render function', () => {
-    const p5Stub = {}
     const renderer1 = spy()
     const renderer2 = spy()
-    const renderers = [renderer1, renderer2]
+    const store = new Store()
+    store.renderers = [renderer1, renderer2]
 
-    const render = draw(p5Stub, { renderers, store: null })
+    const render = draw(p, { store })
     expect(render).to.be.a('function')
 
     render()

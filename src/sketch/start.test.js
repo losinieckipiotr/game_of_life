@@ -1,27 +1,32 @@
 import { expect } from '@open-wc/testing'
 import { stub } from 'sinon'
 
+import { getP5 } from '../test-helper'
 import { start } from './start'
 
 describe('start', () => {
-  it('should return function that setups p5', () => {
-    const setupStub = { name: 'setup' }
-    const drawStub = { name: 'draw' }
-    const p5Stub = { name: 'p5' }
+  let p
+  before(() => {
+    p = getP5()
+  })
+
+  it('should set setup and draw functions', () => {
+    const setupStub = stub()
+    const drawStub = stub()
 
     const setup = stub().returns(setupStub)
     const draw = stub().returns(drawStub)
 
     const sketch = start(setup, draw)
 
-    sketch(p5Stub)
+    sketch(p)
 
     expect(setup).to.have.been.calledOnce
-    expect(setup.getCall(0).args[0]).to.be.equal(p5Stub)
-    expect(p5Stub.setup).to.be.equal(setupStub)
+    expect(setup.getCall(0).args[0]).to.equal(p)
+    expect(p.setup).to.equal(setupStub)
 
     expect(draw).to.have.been.calledOnce
-    expect(draw.getCall(0).args[0]).to.be.equal(p5Stub)
-    expect(p5Stub.draw).to.be.equal(drawStub)
+    expect(draw.getCall(0).args[0]).to.equal(p)
+    expect(p.draw).to.equal(drawStub)
   })
 })
