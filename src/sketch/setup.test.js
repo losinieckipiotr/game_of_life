@@ -1,6 +1,6 @@
 import { expect } from '@open-wc/testing'
 
-import { getP5 } from '../test-helper'
+import { getP5 } from '../../test/test-helper'
 import { Store } from '../Store'
 import { setup } from './setup'
 

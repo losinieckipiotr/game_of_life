@@ -1,7 +1,7 @@
 import { expect } from '@open-wc/testing'
 import { stub } from 'sinon'
 
-import { getP5 } from '../test-helper'
+import { getP5 } from '../../test/test-helper'
 import { start } from './start'
 
 describe('start', () => {

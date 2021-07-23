@@ -1,7 +1,7 @@
 import { expect } from '@open-wc/testing'
 import { spy } from 'sinon'
 
-import { getP5 } from '../test-helper'
+import { getP5 } from '../../test/test-helper'
 import { draw } from './draw'
 import { Store } from '../Store'
 

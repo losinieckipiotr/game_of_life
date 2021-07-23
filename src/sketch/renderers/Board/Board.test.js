@@ -1,67 +1,43 @@
 import { expect } from '@open-wc/testing'
-import { spy, stub } from 'sinon'
+import { spy } from 'sinon'
+
+import { getP5 } from '../../../../test/test-helper'
 
 import { Store } from '../../../Store'
 import { Board } from './Board'
 
 import { defaultSimulationRate } from '../../../enums'
 
-// mocked modules
-// import { autorun } from 'mobx'
-
 describe('Board', () => {
-  // beforeEach(() => {
-  // })
+  let p
+  before(() => {
+    p = spy(getP5())
+  })
 
   it('should setup board', () => {
-    const fakeToggleButtonElement = {
-      name: 'toggle button',
-      mouseClicked: spy(),
-      html: spy()
-    }
-    const fakeResetButtonElement = {
-      name: 'reset button',
-      mouseClicked: spy()
-    }
-    const fakeSlider = {
-      name: 'slider',
-      value: () => '30'
-    }
-
-    const pMock = {
-      frameRate: spy(),
-      createCanvas: spy(),
-      createP: spy(),
-      createButton: stub(),
-      createSlider: stub(),
-      color: spy(),
-      mouseX: 0,
-      mouseY: 0,
-      LEFT: 'left',
-      RIGHT: 'right',
-      mouseButton: undefined,
-      mousePressed: undefined,
-      mouseDragged: undefined,
-      keyPressed: undefined,
-      keyCode: undefined,
-      ENTER: 'enter',
-      mouseIsPressed: false
-    }
-
-    pMock.createButton.onFirstCall().returns(fakeToggleButtonElement)
-    pMock.createButton.onSecondCall().returns(fakeResetButtonElement)
-    pMock.createSlider.onFirstCall().returns(fakeSlider)
-
     const store = new Store()
-    const renderBoard = Board(pMock, { store })
+    const renderBoard = Board(p, { store })
 
     expect(renderBoard).to.be.a('function')
-    expect(pMock.createButton.getCall(0).args[0]).to.equal('')
-    expect(pMock.createButton.getCall(1).args[0]).to.equal('Reset')
+
+    expect(p.createButton).to.have.been.calledTwice
+    expect(p.createSlider).to.have.been.calledOnce
+
+    const toggleButton = document.querySelector('#toggleButton')
+
+    expect(toggleButton).to.be.instanceOf(HTMLButtonElement)
+    expect(toggleButton).to.have.trimmed.text('Start simulation')
+
+    const resetButton = document.querySelector('#resetButton')
+
+    expect(resetButton).to.be.instanceOf(HTMLButtonElement)
+    expect(resetButton).to.have.trimmed.text('Reset')
 
     expect(
-      pMock.createSlider.getCall(0)
+      p.createSlider.getCall(0)
         .calledWith(1, 60, defaultSimulationRate, 1)
     ).to.be.true
+
+    // TODO
   })
 })

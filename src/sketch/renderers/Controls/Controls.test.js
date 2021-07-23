@@ -1,52 +1,47 @@
 import { expect } from '@open-wc/testing'
-import { spy, stub } from 'sinon'
+import { spy } from 'sinon'
 import { Controls } from './Controls'
 import { Store } from '../../../Store'
 
-// mocked modules
-import { autorun } from 'mobx'
+import { getP5 } from '../../../../test/test-helper'
+
+import { runInAction } from 'mobx'
+import { defaultSimulationRate } from '../../../enums'
 
 describe('Controls renderer', () => {
+  let p
+  before(() => {
+    p = spy(getP5())
+  })
+
   it('Should create one controls and setup theirs rendering', () => {
-    const spanMock = () => ({
-      addClass: () => {},
-      parent: () => {},
-      html: spy()
-    })
-    const firstSpan = spanMock()
-    const secondSpan = spanMock()
-    const pMock = {
-      createP: spy(
-        () => ({
-          addClass: () => {},
-          parent: () => {}
-        })
-      ),
-      createSpan: spy(
-        stub()
-          .onCall(0).returns(firstSpan)
-          .onCall(1).returns(secondSpan)
-      )
-    }
     const store = new Store()
-    Controls(pMock, { store })
+    Controls(p, { store })
 
-    expect(pMock.createP).to.have.been.calledOnce
-    expect(pMock.createSpan).to.have.been.calledTwice
+    expect(p.createP).to.have.been.calledOnce
+    expect(p.createSpan).to.have.been.calledTwice
 
-    expect(autorun).to.have.been.calledTwice
+    const iterationSpan = document.querySelector('#iterationSpan')
 
-    const [iterationSpanRenderer] = autorun.getCall(0).args
-    const [simulationRateSpanRenderer] = autorun.getCall(1).args
+    expect(iterationSpan).to.be.instanceOf(HTMLSpanElement)
+    expect(iterationSpan).to.have.trimmed.text('Iteration: 0')
 
-    iterationSpanRenderer()
+    runInAction(() => {
+      store.iteration = 1
+    })
 
-    expect(firstSpan.html)
-      .to.have.been.calledOnceWith(`Iteration: ${store.iteration}`)
+    expect(iterationSpan).to.have.trimmed.text('Iteration: 1')
 
-    simulationRateSpanRenderer()
+    const simulationRateSpan = document.querySelector('#simulationRateSpan')
 
-    expect(secondSpan.html)
-      .to.have.been.calledOnceWith(`Simulation rate: ${store.simulationRate}`)
+    expect(simulationRateSpan).to.be.instanceOf(HTMLSpanElement)
+    expect(simulationRateSpan).to.have.trimmed.text(
+      `Simulation rate: ${defaultSimulationRate}`
+    )
+
+    expect(defaultSimulationRate).to.be.equal(30)
+    store.setSimulationRate(60)
+
+    expect(simulationRateSpan).to.have.trimmed.text('Simulation rate: 60')
   })
 })

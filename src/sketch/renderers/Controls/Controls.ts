@@ -11,10 +11,12 @@ export function Controls (p: p, { store }: ControlsParams): Renderer {
   messagesParagraph.addClass('messages-paragraph')
 
   const iterationSpan = p.createSpan()
+  iterationSpan.id('iterationSpan')
   iterationSpan.addClass('msg')
   iterationSpan.parent(messagesParagraph)
 
   const simulationRateSpan = p.createSpan()
+  simulationRateSpan.id('simulationRateSpan')
   simulationRateSpan.addClass('msg')
   simulationRateSpan.parent(messagesParagraph)
 

@@ -25,8 +25,11 @@ export function Board (p: p, { store }: BoardParams): Renderer {
 
   p.createP()
   const toggleButton = p.createButton('')
+  toggleButton.id('toggleButton')
   const resetButton = p.createButton('Reset')
+  resetButton.id('resetButton')
   const simRateSlider = p.createSlider(1, 60, store.simulationRate, 1)
+  simRateSlider.id('simRateSlider')
 
   const renderBlackSquare = MySquare(p, {
     size: squareSize,

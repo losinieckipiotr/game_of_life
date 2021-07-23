@@ -1,11 +1,10 @@
 import { expect } from '@open-wc/testing'
+import { isObservable, isObservableProp, isComputedProp, isAction } from 'mobx'
 import { Store } from './Store'
 import { defaultSimulationRate } from '../enums'
 
-// mocked modules
-import { makeObservable, observable, computed, action } from 'mobx'
-
 describe('store', () => {
+
   it('should make observable with valid config', () => {
     const store = new Store()
 
@@ -14,21 +13,16 @@ describe('store', () => {
     expect(store.iteration).to.be.equal(0)
     expect(store.intervalHandle).to.be.undefined
 
-    expect(makeObservable).to.have.been.calledOnce
+    expect(isObservable(store)).to.be.true
 
-    const makeObservableArgs = makeObservable.getCall(0).args
-    const [storeRef, observableConfig] = makeObservableArgs
-    expect(storeRef).to.be.equal(store)
+    expect(isObservableProp(store, 'simulationRate')).to.be.true
+    expect(isObservableProp(store, 'iteration')).to.be.true
+    expect(isObservableProp(store, 'intervalHandle')).to.be.true
+    expect(isComputedProp(store, 'simulationInterval')).to.be.true
 
-    expect(observableConfig.simulationRate).to.be.equal(observable)
-    expect(observableConfig.iteration).to.be.equal(observable)
-    expect(observableConfig.intervalHandle).to.be.equal(observable)
-
-    expect(observableConfig.simulationInterval).to.be.equal(computed)
-
-    expect(observableConfig.incrementIteration).to.be.equal(action)
-    expect(observableConfig.resetIteration).to.be.equal(action)
-    expect(observableConfig.setIntervalHandle).to.be.equal(action)
+    expect(isAction(store.incrementIteration)).to.be.true
+    expect(isAction(store.resetIteration)).to.be.true
+    expect(isAction(store.setIntervalHandle)).to.be.true
   })
 
   it('should return simulation interval', () => {
