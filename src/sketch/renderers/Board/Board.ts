@@ -188,6 +188,6 @@ export function Board (p: p, { store }: BoardParams): Renderer {
       store.firstRender = false
     }
 
-    store.simulationRate = Number(simRateSlider.value())
+    store.setSimulationRate(Number(simRateSlider.value()))
   }
 }

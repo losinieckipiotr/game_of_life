@@ -14,6 +14,8 @@ export class Store {
   intervalHandle?: number
 
   constructor () {
+    this.intervalHandle = undefined
+
     makeObservable(this, {
       simulationRate: observable,
       iteration: observable,
@@ -23,13 +25,18 @@ export class Store {
 
       incrementIteration: action,
       resetIteration: action,
-      setIntervalHandle: action
+      setIntervalHandle: action,
+      setSimulationRate: action
     })
   }
 
   get simulationInterval (): number {
     const second = 1000
     return Math.floor(second / this.simulationRate)
+  }
+
+  setSimulationRate (simulationRate: number): void {
+    this.simulationRate = simulationRate
   }
 
   incrementIteration (): void {
